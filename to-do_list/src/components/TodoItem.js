@@ -54,7 +54,10 @@ const TodoItem = ({
           </>
         ) : (
           <>
-            <span>{todo.text}</span>
+            <span>
+              {todo.emoji && <span style={{ marginRight: '8px' }}>{todo.emoji}</span>}
+              {todo.text}
+            </span>
             <small style={{ color, fontWeight: 'bold' }}>
               📁 {todo.category}
             </small>

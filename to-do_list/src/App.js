@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import EmojiPicker from 'emoji-picker-react';
 import TodoList from './components/TodoList';
 import './App.css';
 
@@ -10,6 +11,8 @@ const App = () => {
 
   const [input, setInput] = useState('');
   const [category, setCategory] = useState('General');
+  const [emoji, setEmoji] = useState('');
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [editingId, setEditingId] = useState(null);
   const [editText, setEditText] = useState('');
@@ -33,10 +36,12 @@ const App = () => {
           id: Date.now(),
           text: input,
           completed: false,
-          category: category
+          category: category,
+          emoji: emoji
         }
       ]);
       setInput('');
+      setEmoji('');
     }
   };
 
@@ -81,6 +86,10 @@ const App = () => {
     todo.text.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <div className="app">
       <h1>My Creative Todo ✨</h1>
@@ -100,7 +109,7 @@ const App = () => {
         }}
       />
 
-      <div className="input-container">
+      <div className="input-container" style={{ position: 'relative' }}>
         <input
           type="text"
           value={input}
@@ -122,6 +131,33 @@ const App = () => {
           <option value="Personal">Personal</option>
           <option value="Urgent">Urgent</option>
         </select>
+
+        {/* Emoji Picker Button */}
+        <button
+          type="button"
+          onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+          style={{
+            marginLeft: '10px',
+            padding: '6px 10px',
+            fontSize: '18px',
+            borderRadius: '6px',
+            border: '1px solid #ccc',
+            cursor: 'pointer'
+          }}
+        >
+          {emoji || '😀'}
+        </button>
+
+        {showEmojiPicker && (
+          <div style={{ position: 'absolute', top: '100%', zIndex: 999 }}>
+            <EmojiPicker
+              onEmojiClick={(e) => {
+                setEmoji(e.emoji);
+                setShowEmojiPicker(false);
+              }}
+            />
+          </div>
+        )}
 
         <button onClick={addTodo}>Add</button>
       </div>
@@ -145,6 +181,30 @@ const App = () => {
         onEditCancel={handleEditCancel}
         onEditSave={handleEditSave}
       />
+
+      {/* Scroll to Top Button */}
+      <button
+        onClick={scrollToTop}
+        style={{
+          position: 'fixed',
+          bottom: '20px',
+          right: '20px',
+          padding: '14px 18px',
+          fontSize: '20px',
+          borderRadius: '50%',
+          background: 'linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab)',
+          backgroundSize: '400% 400%',
+          animation: 'gradientBG 10s ease infinite',
+          color: '#fff',
+          border: 'none',
+          cursor: 'pointer',
+          boxShadow: '0 0 15px rgba(0, 0, 0, 0.3)',
+          zIndex: 1000
+        }}
+        title="Scroll to Top"
+      >
+        ⬆
+      </button>
     </div>
   );
 };
