@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/to-do_list/static/css/main.fadaeafb.css",
+    "main.js": "/to-do_list/static/js/main.9871d6c9.js",
+    "static/js/453.8d371e8c.chunk.js": "/to-do_list/static/js/453.8d371e8c.chunk.js",
+    "index.html": "/to-do_list/index.html",
+    "main.fadaeafb.css.map": "/to-do_list/static/css/main.fadaeafb.css.map",
+    "main.9871d6c9.js.map": "/to-do_list/static/js/main.9871d6c9.js.map",
+    "453.8d371e8c.chunk.js.map": "/to-do_list/static/js/453.8d371e8c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fadaeafb.css",
+    "static/js/main.9871d6c9.js"
+  ]
+}
